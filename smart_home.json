@@ -1,0 +1,659 @@
+[
+    {
+        "id": "83b122bf.6e7018",
+        "type": "tab",
+        "label": "GARAŻ",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f56fcc82.8f2c6",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/DOOR/SWITCH1/STATUS",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "d43843b5.8cc208",
+                "8371901b.496fe",
+                "246e5ea1.8877d2"
+            ]
+        ]
+    },
+    {
+        "id": "2d8950d6.83b78",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/BMP180/TEMPERATURE",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 240,
+        "y": 400,
+        "wires": [
+            [
+                "726b16af.fe9bc",
+                "ae0901c6.79d9",
+                "7b64f800.4cc2b8"
+            ]
+        ]
+    },
+    {
+        "id": "36aef47b.5c6154",
+        "type": "ui_button",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "group": "4badd280.d08b0c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "BRAMA",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "trigger",
+        "payloadType": "str",
+        "topic": "",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "5291a1e4.29f66"
+            ]
+        ]
+    },
+    {
+        "id": "f9a31a1f.878fb",
+        "type": "ui_text",
+        "z": "83b122bf.6e7018",
+        "group": "4badd280.d08b0c",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 890,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a16d13aa.8c0cf8",
+        "type": "mqtt out",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/DOOR/BUTTON1/PIN",
+        "qos": "",
+        "retain": "",
+        "broker": "1a0aeab0.c792c5",
+        "x": 570,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d43843b5.8cc208",
+        "type": "debug",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 920,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "726b16af.fe9bc",
+        "type": "ui_text",
+        "z": "83b122bf.6e7018",
+        "group": "4badd280.d08b0c",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "TEMPERATURE",
+        "label": "",
+        "format": "{{msg.payload}} C",
+        "layout": "row-center",
+        "x": 610,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "59449f37.3570c",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/DOOR/SWITCH2/STATUS",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "d43843b5.8cc208",
+                "5e83c148.7006f",
+                "246e5ea1.8877d2"
+            ]
+        ]
+    },
+    {
+        "id": "8371901b.496fe",
+        "type": "function",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "func": "global.set(\"GARAGE/DOOR/SWITCH1/STATE\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "b84c3419.da5448"
+            ]
+        ]
+    },
+    {
+        "id": "5e83c148.7006f",
+        "type": "function",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "func": "global.set(\"GARAGE/DOOR/SWITCH2/STATE\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 300,
+        "wires": [
+            [
+                "b84c3419.da5448"
+            ]
+        ]
+    },
+    {
+        "id": "b84c3419.da5448",
+        "type": "function",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "func": "if( global.get(\"GARAGE/DOOR/SWITCH1/STATE\") == \"0\" && \n    global.get(\"GARAGE/DOOR/SWITCH2/STATE\") == \"1\" )\n//    msg.payload = \"<i class=\\\"fa fa-caret-square-o-down\\\"></i>\";\n    msg.payload = \"<i>ZAMKNIĘTA</i>\";\nelse if( global.get(\"GARAGE/DOOR/SWITCH1/STATE\") == \"1\" && \n    global.get(\"GARAGE/DOOR/SWITCH2/STATE\") == \"0\" )\n//    msg.payload = \"<i class=\\\"fa fa-caret-square-o-up\\\"></i>\";\n    msg.payload = \"<i>OTWARTA</i>\";\nelse\n    msg.payload = \"UCHYLONA\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 720,
+        "y": 260,
+        "wires": [
+            [
+                "f9a31a1f.878fb"
+            ]
+        ]
+    },
+    {
+        "id": "ae0901c6.79d9",
+        "type": "debug",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 860,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5291a1e4.29f66",
+        "type": "trigger",
+        "z": "83b122bf.6e7018",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "a16d13aa.8c0cf8"
+            ]
+        ]
+    },
+    {
+        "id": "f8cdb704.c86828",
+        "type": "ui_text",
+        "z": "83b122bf.6e7018",
+        "group": "4badd280.d08b0c",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "PRESSURE",
+        "label": "",
+        "format": "{{msg.payload}} hPa",
+        "layout": "row-center",
+        "x": 600,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "2e013bca.b94384",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/BMP180/PRESSURE",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 230,
+        "y": 500,
+        "wires": [
+            [
+                "f8cdb704.c86828",
+                "ae0901c6.79d9",
+                "3da48e85.6a0d92"
+            ]
+        ]
+    },
+    {
+        "id": "83c26dca.18a71",
+        "type": "ui_chart",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "group": "4badd280.d08b0c",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69d1ff8b.6b65",
+        "type": "ui_chart",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "group": "4badd280.d08b0c",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8ccb0ad.f41e0f8",
+        "type": "ui_dropdown",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "label": "Odśwież co",
+        "tooltip": "rate for bmp180",
+        "place": "Select option",
+        "group": "4badd280.d08b0c",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "3 sec",
+                "value": "3000",
+                "type": "str"
+            },
+            {
+                "label": "30 sec",
+                "value": "30000",
+                "type": "str"
+            },
+            {
+                "label": "1 min",
+                "value": "60000",
+                "type": "str"
+            },
+            {
+                "label": "3 min",
+                "value": "180000",
+                "type": "str"
+            },
+            {
+                "label": "10 min",
+                "value": "600000",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 210,
+        "y": 600,
+        "wires": [
+            [
+                "dfe86648.7269f8"
+            ]
+        ]
+    },
+    {
+        "id": "dfe86648.7269f8",
+        "type": "mqtt out",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/BMP180/RATE",
+        "qos": "",
+        "retain": "",
+        "broker": "1a0aeab0.c792c5",
+        "x": 630,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "694e12dc.f1223c",
+        "type": "ui_switch",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "4badd280.d08b0c",
+        "order": 2,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "fa-power-off",
+        "oncolor": "red",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "fa-power-off",
+        "offcolor": "white",
+        "x": 630,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "639bd49f.fa4fcc",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/DOOR/ACRELAY/STATUS",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 250,
+        "y": 60,
+        "wires": [
+            [
+                "694e12dc.f1223c"
+            ]
+        ]
+    },
+    {
+        "id": "246e5ea1.8877d2",
+        "type": "debug",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 840,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "bc0511f5.ef56e",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/DOOR/BUTTON1/STATE",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 250,
+        "y": 660,
+        "wires": [
+            [
+                "732394b7.f0e7dc",
+                "4ac5e1.5b606a2"
+            ]
+        ]
+    },
+    {
+        "id": "9b6b65b7.5e2778",
+        "type": "mqtt in",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "topic": "HOME/GARAGE/DOOR/BUTTON2/STATE",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "1a0aeab0.c792c5",
+        "x": 250,
+        "y": 720,
+        "wires": [
+            [
+                "83336a5b.f01e68",
+                "4ac5e1.5b606a2"
+            ]
+        ]
+    },
+    {
+        "id": "732394b7.f0e7dc",
+        "type": "ui_switch",
+        "z": "83b122bf.6e7018",
+        "name": "BUTTON1",
+        "label": "",
+        "tooltip": "",
+        "group": "4badd280.d08b0c",
+        "order": 3,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 590,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "83336a5b.f01e68",
+        "type": "ui_switch",
+        "z": "83b122bf.6e7018",
+        "name": "BUTTON2",
+        "label": "",
+        "tooltip": "",
+        "group": "4badd280.d08b0c",
+        "order": 4,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 590,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ac5e1.5b606a2",
+        "type": "debug",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 780,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "7b64f800.4cc2b8",
+        "type": "function",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "func": "msg.topic = \"\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "69d1ff8b.6b65"
+            ]
+        ]
+    },
+    {
+        "id": "3da48e85.6a0d92",
+        "type": "function",
+        "z": "83b122bf.6e7018",
+        "name": "",
+        "func": "msg.topic = \"\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 560,
+        "wires": [
+            [
+                "83c26dca.18a71"
+            ]
+        ]
+    },
+    {
+        "id": "1a0aeab0.c792c5",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "HOME",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "4badd280.d08b0c",
+        "type": "ui_group",
+        "z": "",
+        "name": "GARAŻ",
+        "tab": "1bd80aa9.6875ad",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1bd80aa9.6875ad",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Garaż",
+        "icon": "directions_car",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
