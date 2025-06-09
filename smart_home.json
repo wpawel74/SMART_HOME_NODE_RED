@@ -3439,14 +3439,16 @@
         "ieeeType": "off",
         "ieeeBE": "true",
         "x": 120,
-        "y": 80,
+        "y": 100,
         "wires": [
             [
                 "2f4f7cdd.1eaa44",
                 "8f866e1.5c4359",
                 "b47ed028.74d74",
                 "7da7fc21.5578a4",
-                "6800b811.967188"
+                "6800b811.967188",
+                "b361da98.e91068",
+                "18ca4e11.da2742"
             ]
         ]
     },
@@ -3461,8 +3463,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 340,
-        "y": 20,
+        "x": 140,
+        "y": 220,
         "wires": []
     },
     {
@@ -3475,7 +3477,7 @@
         "adr": "1",
         "server": "5e487824.a62988",
         "x": 800,
-        "y": 160,
+        "y": 180,
         "wires": []
     },
     {
@@ -3496,7 +3498,7 @@
         "max": 10,
         "step": 1,
         "x": 530,
-        "y": 80,
+        "y": 100,
         "wires": [
             [
                 "c60b93cd.363d4"
@@ -3512,7 +3514,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 80,
+        "y": 100,
         "wires": [
             [
                 "9b058ba9.8d66d8"
@@ -3534,7 +3536,7 @@
         "ieeeType": "off",
         "ieeeBE": "true",
         "x": 120,
-        "y": 280,
+        "y": 300,
         "wires": [
             [
                 "2f4f7cdd.1eaa44",
@@ -3552,7 +3554,7 @@
         "tooltip": "",
         "place": "Select option",
         "group": "f4fd1bc4.da2ce8",
-        "order": 2,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -3576,7 +3578,7 @@
         "payload": "",
         "topic": "",
         "x": 520,
-        "y": 280,
+        "y": 300,
         "wires": [
             [
                 "ad7912b0.83aa3"
@@ -3592,7 +3594,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 280,
+        "y": 300,
         "wires": [
             [
                 "2b145f08.ebdc6"
@@ -3607,7 +3609,7 @@
         "label": "Bypass status",
         "tooltip": "",
         "group": "f4fd1bc4.da2ce8",
-        "order": 3,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -3623,7 +3625,7 @@
         "officon": "",
         "offcolor": "",
         "x": 550,
-        "y": 340,
+        "y": 360,
         "wires": [
             []
         ]
@@ -3637,7 +3639,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 340,
+        "y": 360,
         "wires": [
             [
                 "61650d48.c6ab84"
@@ -3653,7 +3655,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 160,
+        "y": 180,
         "wires": [
             [
                 "d9704003.baafd",
@@ -3672,7 +3674,7 @@
         "tostatus": false,
         "complete": "false",
         "x": 800,
-        "y": 220,
+        "y": 240,
         "wires": []
     },
     {
@@ -3680,11 +3682,11 @@
         "type": "function",
         "z": "6d00a818.da8f98",
         "name": "",
-        "func": "global.set(\"RECU/BYPASS\", msg.payload);\nmsg.payload = [\n    Number(global.get(\"RECU/SPEED\")) ,\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    ];\nreturn msg;",
+        "func": "global.set(\"RECU/BYPASS\", msg.payload);\nmsg.payload = [\n    Number(global.get(\"RECU/SPEED\")),\n    Number(0),\n    Number(global.get(\"RECU/TEMP\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    Number(0),\n    Number(global.get(\"RECU/BYPASS\")),\n    ];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 220,
+        "y": 240,
         "wires": [
             [
                 "ac8759ae.8b7dc8",
@@ -3697,11 +3699,11 @@
         "type": "function",
         "z": "6d00a818.da8f98",
         "name": "",
-        "func": "var o = msg.payload\nmsg.payload = Number(o[10])/10;\nreturn msg;",
+        "func": "var o = msg.payload\nmsg.payload = Number(o[11])/10;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 440,
+        "y": 500,
         "wires": [
             [
                 "1ac8da5a.a539d6"
@@ -3713,7 +3715,7 @@
         "type": "ui_text",
         "z": "6d00a818.da8f98",
         "group": "f4fd1bc4.da2ce8",
-        "order": 5,
+        "order": 7,
         "width": 0,
         "height": 0,
         "name": "TEMP. ZEW",
@@ -3721,7 +3723,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 540,
-        "y": 440,
+        "y": 500,
         "wires": []
     },
     {
@@ -3729,11 +3731,11 @@
         "type": "function",
         "z": "6d00a818.da8f98",
         "name": "",
-        "func": "var o = msg.payload\nmsg.payload = Number(o[11])/10;\nreturn msg;",
+        "func": "var o = msg.payload\nmsg.payload = Number(o[12])/10;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 500,
+        "y": 560,
         "wires": [
             [
                 "90b4eff9.640b2"
@@ -3745,7 +3747,7 @@
         "type": "ui_text",
         "z": "6d00a818.da8f98",
         "group": "f4fd1bc4.da2ce8",
-        "order": 6,
+        "order": 8,
         "width": 0,
         "height": 0,
         "name": "TEMP. NAW",
@@ -3753,7 +3755,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 540,
-        "y": 500,
+        "y": 560,
         "wires": []
     },
     {
@@ -3761,11 +3763,11 @@
         "type": "function",
         "z": "6d00a818.da8f98",
         "name": "",
-        "func": "var o = msg.payload\nmsg.payload = Number(o[12]);\nreturn msg;",
+        "func": "var o = msg.payload\nmsg.payload = Number(o[13]);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
-        "y": 560,
+        "y": 620,
         "wires": [
             [
                 "f8f5293b.e61598"
@@ -3777,7 +3779,7 @@
         "type": "ui_text",
         "z": "6d00a818.da8f98",
         "group": "f4fd1bc4.da2ce8",
-        "order": 4,
+        "order": 6,
         "width": 0,
         "height": 0,
         "name": "BYPASS",
@@ -3785,7 +3787,96 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 530,
-        "y": 560,
+        "y": 620,
         "wires": []
+    },
+    {
+        "id": "b361da98.e91068",
+        "type": "function",
+        "z": "6d00a818.da8f98",
+        "name": "",
+        "func": "var o = msg.payload\nmsg.payload = Number(o[2]);\nglobal.set(\"RECU/TEMP\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 40,
+        "wires": [
+            [
+                "a3efcf3d.49df4"
+            ]
+        ]
+    },
+    {
+        "id": "c0c23477.9df788",
+        "type": "function",
+        "z": "6d00a818.da8f98",
+        "name": "",
+        "func": "global.set(\"RECU/TEMP\", msg.payload);\nmsg.payload = [\n    Number(global.get(\"RECU/SPEED\")),\n    Number(0),\n    Number(global.get(\"RECU/TEMP\"))\n    ];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 40,
+        "wires": [
+            [
+                "d9704003.baafd"
+            ]
+        ]
+    },
+    {
+        "id": "a3efcf3d.49df4",
+        "type": "ui_slider",
+        "z": "6d00a818.da8f98",
+        "name": "",
+        "label": "Temp zadana",
+        "tooltip": "",
+        "group": "f4fd1bc4.da2ce8",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "all",
+        "topic": "",
+        "min": 0,
+        "max": "35",
+        "step": 1,
+        "x": 540,
+        "y": 40,
+        "wires": [
+            [
+                "c0c23477.9df788"
+            ]
+        ]
+    },
+    {
+        "id": "1743f244.42aeae",
+        "type": "ui_text",
+        "z": "6d00a818.da8f98",
+        "group": "f4fd1bc4.da2ce8",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "TEMP. ZADANA",
+        "label": "Temp. zadana",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 560,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "18ca4e11.da2742",
+        "type": "function",
+        "z": "6d00a818.da8f98",
+        "name": "",
+        "func": "var o = msg.payload\nmsg.payload = Number(o[2]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "1743f244.42aeae"
+            ]
+        ]
     }
 ]
