@@ -366,7 +366,7 @@
         "type": "modbustcp-server",
         "z": "",
         "name": "LOGO8_Recu_VW",
-        "host": "10.0.0.94",
+        "host": "10.0.0.51",
         "port": "502",
         "unit_id": "255",
         "reconnecttimeout": "10"
@@ -396,7 +396,7 @@
         "type": "modbustcp-server",
         "z": "",
         "name": "LOGO8_Recu_Coil",
-        "host": "10.0.0.94",
+        "host": "10.0.0.51",
         "port": "503",
         "unit_id": "1",
         "reconnecttimeout": "10"
@@ -406,7 +406,7 @@
         "type": "modbustcp-server",
         "z": "",
         "name": "LOGO8_Recu_VW_RW",
-        "host": "10.0.0.94",
+        "host": "10.0.0.51",
         "port": "504",
         "unit_id": "1",
         "reconnecttimeout": "10"
@@ -760,6 +760,7 @@
         "id": "8ccb0ad.f41e0f8",
         "type": "ui_dropdown",
         "z": "83b122bf.6e7018",
+        "d": true,
         "name": "",
         "label": "Odśwież co",
         "tooltip": "rate for bmp180",
@@ -2409,7 +2410,7 @@
         "y": 340,
         "wires": [
             [
-                "69d1ff8b.6b65"
+                "479d12c8.317534"
             ]
         ]
     },
@@ -2421,11 +2422,11 @@
         "func": "msg.topic = \"\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 590,
+        "x": 550,
         "y": 560,
         "wires": [
             [
-                "83c26dca.18a71"
+                "46949218.857b34"
             ]
         ]
     },
@@ -3668,7 +3669,7 @@
         "type": "debug",
         "z": "6d00a818.da8f98",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3699,7 +3700,7 @@
         "type": "function",
         "z": "6d00a818.da8f98",
         "name": "",
-        "func": "var o = msg.payload\nmsg.payload = Number(o[11])/10;\nreturn msg;",
+        "func": "var o = Buffer.from(msg.payload);\nmsg.payload = o.readInt8(11)/10;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -3731,7 +3732,7 @@
         "type": "function",
         "z": "6d00a818.da8f98",
         "name": "",
-        "func": "var o = msg.payload\nmsg.payload = Number(o[12])/10;\nreturn msg;",
+        "func": "var o = Buffer.from(msg.payload);\nmsg.payload = o.readInt8(12)/10;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -3876,6 +3877,50 @@
         "wires": [
             [
                 "1743f244.42aeae"
+            ]
+        ]
+    },
+    {
+        "id": "46949218.857b34",
+        "type": "trigger",
+        "z": "83b122bf.6e7018",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "10",
+        "extend": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 720,
+        "y": 560,
+        "wires": [
+            [
+                "83c26dca.18a71"
+            ]
+        ]
+    },
+    {
+        "id": "479d12c8.317534",
+        "type": "trigger",
+        "z": "83b122bf.6e7018",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "10",
+        "extend": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 740,
+        "y": 340,
+        "wires": [
+            [
+                "69d1ff8b.6b65"
             ]
         ]
     }
